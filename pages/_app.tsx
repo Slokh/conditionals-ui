@@ -8,6 +8,7 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import theme from "../theme";
+import { SeaportProvider } from "../context/seaport";
 
 const { chains, provider } = configureChains(
   [chain.rinkeby],
@@ -31,7 +32,9 @@ const App = ({ Component, pageProps }: AppProps) => {
       </Head>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
-          <Component {...pageProps} />
+          <SeaportProvider>
+            <Component {...pageProps} />
+          </SeaportProvider>
         </RainbowKitProvider>
       </WagmiConfig>
     </ChakraProvider>
